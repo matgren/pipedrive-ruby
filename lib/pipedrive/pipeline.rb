@@ -10,8 +10,8 @@ module Pipedrive
       res.ok? ? new(res) : bad_response(res,{:id=>id,:start_date=>start_date,:end_date=>end_date})
     end
 
-    def deals(id, stage_id)
-      Pipedrive::Deal.all(get "#{resource_path}/#{id}/deals", :stage_id => stage_id )
+    def deals(id, stage_id, opts = {:start => 0})
+      Pipedrive::Deal.all(get("#{resource_path}/#{id}/deals",:query => opts.merge(:stage_id => stage_id)) )
     end
   end
 end
